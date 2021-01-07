@@ -24,7 +24,7 @@ setup(
         'Programming Language :: Python :: 3',
     ],
     license='MIT',
-    packages=['django_crud_generator'],
+    packages=['django_crud_generator', 'base_django'],
     scripts=['django_crud_generator/bin/django-crud-generator.py'],
     zip_safe=False,
     include_package_data=True,
