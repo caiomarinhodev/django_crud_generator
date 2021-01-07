@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+    <h1>
+        {% trans 'List of' %} {{ model_name_plural }}
+    </h1>
+    {% for element in list %}
+        <div class="card">
+            <div class="card-title black-text">
+                {% if element.slug %}
+                    <a href="{% url detail_url_name element.slug %}">{{ element }}</a>
+                {% else %}
+                    <a href="{% url detail_url_name element.id %}">{{ element }}</a>
+                {% endif %}
+
+            </div>
+            {% if element.description%}
+                <div class="card-content">
+                    {{ element.description }}
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+    <div class="actions">
+        {% if create_object_reversed_url %}
+            <a href="{{ create_object_reversed_url }}">
+
+                <button class="btn btn-success">
+                    {% trans 'Create' %}
+                </button>
+            </a>
+        {% endif %}
+    </div>
+{% endblock %}

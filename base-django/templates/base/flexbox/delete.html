@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+    <div class="row">
+        <div class="col">
+
+            <h1>
+                {% trans 'Delete' %} {{ model_name }}
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col content">
+
+            <h3>
+                {% trans 'Trying to delete' %} {{ object }}
+            </h3>
+            <p>
+                {% trans 'Deleting this object also deletes this objects' %}
+            </p>
+            {{ deleted_objects|unordered_list }}
+            <form method="POST">
+                {% csrf_token %}
+                <div class="options">
+                    <button class="btn btn-danger">
+                        {% trans 'Delete' %}
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

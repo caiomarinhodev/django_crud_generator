@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+    <h1>
+        {% trans 'Grid of' %} {{ model_name_plural }}
+    </h1>
+    {% for element in list %}
+        <div class="col s12 m4">
+            <div class="card">
+                {% if element.image %}
+                    <div class="card-image">{% if element.slug %}
+                        <a href="{% url detail_url_name element.slug %}">
+                    {% else %}
+                        <a href="{% url detail_url_name element.id %}">
+                    {% endif %}
+                        <img src="/media/{{ element.image }}"/>
+                        </a>
+
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator">{{ element.name }}</span>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title activator">{{ element.name }}<i class="material-icons right">close</i></span>
+                        {{ element.description| safe }}
+                    </div>
+                {% else %}
+                    <div class="card-title black-text">
+                        {% if element.slug %}
+                            <a href="{% url detail_url_name element.slug %}">{{ element }}</a>
+                        {% else %}
+                            <a href="{% url detail_url_name element.id %}">{{ element }}</a>
+                        {% endif %}
+                    </div>
+                    {% if element.description%}
+                        <div class="card-content">
+                            {{ element.description }}
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+        {% if forloop.counter|divisibleby:3 %}
+            </div>
+            <div class="row">
+        {% endif %}
+    {% endfor %}
+
+{% endblock %}

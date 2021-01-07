@@ -1,0 +1,19 @@
+<section class="content-header">
+    <h1>
+        {{ title }}
+        <small>{{ subtitle }}</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        {% if link1 %}
+            <li class="active">{{ link1 }}</li>
+        {% endif %}
+        {% if link2 %}
+            <li class="active">{{ link2 }}</li>
+        {% endif %}
+        {% if link3 %}
+            <li class="active">{{ link3 }}</li>
+        {% endif %}
+
+    </ol>
+</section>

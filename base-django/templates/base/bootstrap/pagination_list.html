@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <h1>
+                {% trans 'List of' %} {{ model_name_plural }}
+            </h1>
+            <table class="table table-responsive">
+                <thead>
+                <tr>
+                    <th>
+                        {{ model_name_plural }}
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for element in list %}
+                    <tr>
+                        <td>
+                            {% if element.slug %}
+                                <a href="{% url detail_url_name element.slug %}">{{ element }}</a>
+                            {% else %}
+                                <a href="{% url detail_url_name element.id %}">{{ element }}</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-xs-offset-3 col-lg-6 col-lg-offset-3">
+            <nav aria-label="Page navigation">
+
+                <ul class="pagination">
+
+                    {% if list.has_previous %}
+                        <li class="page-item">
+                            <a href="?page={{ list.previous_page_number }}" class="page-link">
+                                <i class="fa fa-arrow-left"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% for i in range %}
+                        {% if i == list.number %}
+                            <li class="active black page-item">
+                                <a href="#!" class="page-link">
+                                    {{ i }}
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a href="?page={{ i }}" class="page-link">
+                                    {{ i }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if list.has_next %}
+                        <li class="page-item">
+                            <a href="?page={{ list.next_page_number }}" class="page-link">
+                                <i class="fa fa-arrow-right"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+
+
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="actions">
+                {% if create_object_reversed_url %}
+                    <a href="{{ create_object_reversed_url }}">
+
+                        <button class="btn btn-success">
+                            {% trans 'Create' %}
+                        </button>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

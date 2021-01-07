@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+    <h1>
+        {% trans 'Delete' %} {{ model_name }}
+    </h1>
+    <h3>
+        {% trans 'Trying to delete' %} {{ object }}
+    </h3>
+    <p>
+        {% trans 'Deleting this object also deletes this objects' %}
+    </p>
+        {{ deleted_objects|unordered_list }}
+    <form method="POST">
+        {% csrf_token %}
+        <input type="submit" class="btn black" value="{% trans 'Delete' %}">
+    </form>
+
+{% endblock %}

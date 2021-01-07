@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+    {% include 'breadcrumb.html' with title='Adicionar' subtitle='Crie itens' link1='Model' link2='Adicionar' %}
+
+    <div class="box box-primary" style="margin-top: 30px;">
+        <div class="box-header">
+            <h3 class="box-title">
+                <center style="font-size: 20px;">Adicionar</center>
+            </h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form action="" method="post">{% csrf_token %}
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        {% load crispy_forms_tags %}
+                        {% crispy form %}
+                    </div>
+                </div>
+            </div>
+            <div class="box box-footer">
+                <div class="actions">
+                    <a href="javascript:window.history.back();">
+                        <button type="button" class="btn btn-default pull-left">
+                            Voltar
+                        </button>
+                    </a>
+                    <button id="btn_salvar" type="submit" class="btn btn-primary pull-right">
+                        Adicionar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#model').addClass('active');
+            $('#model-create').addClass('active');
+
+            tour = new Tour({
+                name: 'model_create',
+                backdrop: true,
+                template: "<div class='popover tour'><div class='arrow'></div><h3 class='popover-title'></h3><div class='popover-content'></div><div class='popover-navigation'><button class='btn btn-default' data-role='prev'>« Anterior</button><span data-role='separator'>|</span><button id='prox' class='btn btn-default' data-role='next'>Próximo »</button><button id='fim' class='btn btn-default hidden' data-role='end'>Finalizar</button> </div></div>",
+                steps: [
+                    {
+                        element: ".box.box-primary",
+                        placement: "top",
+                        title: "Adicionar",
+                        content: "Aqui temos o formulário para criar um item."
+                    },
+                    {
+                        element: "#btn_salvar",
+                        title: "Salvar",
+                        placement: "left",
+                        content: "Utilize este botão para criar o novo item.",
+                        onShow: function (tour) {
+                            var timeOut = setTimeout(function () {
+                                $('#fim').removeClass('hidden');
+                                $('#prox').addClass('hidden');
+                                timeOut = setTimeout(function () {
+                                    $('#fim').removeClass('hidden');
+                                    clearTimeout(timeOut);
+                                }, 500);
+                            }, 500);
+
+                        }
+                    }
+
+                ]
+            });
+        });
+    </script>
+
+
+{% endblock %}

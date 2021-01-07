@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+    <h1>
+        {{ element }} {% trans 'Of class' %} {{ model_name }}
+    </h1>
+    {% for name, value in element.get_fields %}
+      <div class="row">
+        <div class="col s3">
+            <h5>{{ name }}</h5>
+        </div>
+        <div class="col s9">
+            {{ value }}
+        </div>
+      </div>
+    {% endfor %}
+
+    <div class="actions">
+        <a href="javascript:window.history.back();">
+            <button class="btn btn-default">
+                {% trans 'Back' %}
+            </button>
+        </a>
+        {% if update_object_reversed_url %}
+            <a href="{{ update_object_reversed_url }}">
+                <button class="btn btn-primary">
+                    {% trans 'Update' %}
+                </button>
+            </a>
+        {% endif %}
+        {% if delete_object_reversed_url %}
+            <a href="{{ delete_object_reversed_url }}">
+                <button class="btn btn-danger">
+                    {% trans 'Delete' %}
+                </button>
+            </a>
+        {% endif %}
+    </div>
+{% endblock %}

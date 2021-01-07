@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load input_checker %}
+{% block content %}
+    <div class="row">
+
+        <h1>{% trans 'Create' %} {{ model_name }}</h1>
+    </div>
+    <div class="row">
+
+        <form method="POST" enctype="multipart/form-data" class="col">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                <div class="non-field-errors">
+                    {% for err in form.non_field_errors %}
+                        <p class="form-error">{{ err }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% for input in form %}
+                <div class="input-group row">
+                    {% if input.errors %}
+                        {{ input.errors }}
+                    {% endif %}
+                </div>
+                <div class="input-group row">
+                    <div class="col">
+
+                        <label>{{ input.label }}</label>
+
+                        {{ input }}
+                    </div>
+                </div>
+
+            {% endfor %}
+            <div class="row">
+
+                <a href="javascript:window.history.back();" class="col">
+                    <button class="col btn btn-default">
+                        <i class="fa fa-arrow-left"></i>
+                        Back
+                    </button>
+
+                </a>
+                <button type="submit" class="col btn btn-primary">
+                    {% trans 'create' %}
+                    <i class="fa fa-plus"></i>
+                </button>
+            </div>
+        </form>
+
+    </div>
+
+{% endblock %}

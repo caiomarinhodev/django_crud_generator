@@ -13,17 +13,17 @@ urlpatterns += [
         name=conf.${model_prefix}_CREATE_URL_NAME
     ),
     path(
-        '${url_pattern}/<int:pk>)/',
+        '${url_pattern}/<int:pk>/',
         ${view_file}.Detail.as_view(),
         name=conf.${model_prefix}_DETAIL_URL_NAME
     ),
     path(
-        '${url_pattern}/<int:pk>)/update/',
+        '${url_pattern}/<int:pk>/update/',
         ${view_file}.Update.as_view(),
         name=conf.${model_prefix}_UPDATE_URL_NAME
     ),
     path(
-        '${url_pattern}/<int:pk>)/delete/',
+        '${url_pattern}/<int:pk>/delete/',
         ${view_file}.Delete.as_view(),
         name=conf.${model_prefix}_DELETE_URL_NAME
     ),

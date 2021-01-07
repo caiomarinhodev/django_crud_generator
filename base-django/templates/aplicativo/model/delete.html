@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load staticfiles %}
+
+{% block content %}
+    <style>
+        .pg-product-price {
+            font-size: 20px;
+            font-weight: 600;
+            color: #ff8700;
+        }
+    </style>
+
+    <div class="container">
+        <div class="row ">
+            <div class="col s12 m12 l12 ">
+                <div class="section-title">
+                    <span class="theme-secondary-color">Remover</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <form class="col s12 center" method="post">
+                    {% csrf_token %}
+                     <span class="theme-form">Você realmente deseja deletar "{{ object }}" ?</span>
+
+                    <div class="row">
+                        <div class="input-field col s12 m6 l4 offset-m3 offset-l4 center">
+                            <button class="waves-effect waves-light btn" type="submit">Remover</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

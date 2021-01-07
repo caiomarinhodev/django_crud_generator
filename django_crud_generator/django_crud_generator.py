@@ -5,6 +5,7 @@ import functools
 import operator
 import os
 import re
+import shutil
 import sys
 import string
 
@@ -218,6 +219,24 @@ def execute_from_command_line():
     )
 
     parser.add_argument(
+        '--type_template',
+        default="dashboard",
+        help="Specifies default templates base"
+    )
+
+    parser.add_argument(
+        '--gen_template_default',
+        action='store_true',
+        help="Create a template default base"
+    )
+
+    parser.add_argument(
+        '--gen_template_model',
+        action='store_true',
+        help="Create a templates for model"
+    )
+
+    parser.add_argument(
         '--model_name',
         type=str,
         help="Name of model for make the crud",
@@ -295,8 +314,8 @@ def execute_from_command_line():
         ]
 
     # If mixins flag is present, we add mixins to the `modules to inject`
-    if args['add_mixins']:
-        modules_to_inject.append('mixins')
+    #if args['add_mixins']:
+    modules_to_inject.append('mixins')
 
     for module in modules_to_inject:
         generic_insert_module(
@@ -326,6 +345,61 @@ def execute_from_command_line():
                 "urls_api_urls_patch.py.tmpl"
             )
         )
+
+
+def copy_templates(args):
+    lista = []
+    if args['gen_template_default']:
+        if args['type'] == 'dashboard':
+            lista = [
+                '404.html', '500.html', 'base.html', 'base_error.html', 'loading.html', 'breadcrumb.html', 'menu.html'
+            ]
+        elif args['type'] == 'aplicativo':
+            lista = [
+                '404.html', '500.html', 'base.html', 'footer.html', 'header.html', 'nav.html'
+            ]
+        for basic in lista:
+            original = os.path.join(
+                'base_django',
+                'templates',
+                args['type_template'],
+                basic
+            )
+            target = os.path.join(
+                args['django_application_folder'],
+                'templates',
+                basic
+            )
+            shutil.copy(original, target)
+
+    if args['gen_template_model']:
+        for item in VIEW_CLASSES:
+            if not os.path.isdir(
+                    os.path.join(
+                        args['django_application_folder'],
+                        'templates',
+                        convert(args['model_name'].strip().lower()))):
+                os.mkdir(
+                    os.path.join(
+                        args['django_application_folder'],
+                        'templates',
+                        convert(args['model_name'].strip().lower()))
+                )
+            original = os.path.join(
+                'base_django',
+                'templates',
+                args['type_template'],
+                'model',
+                convert(item.strip().lower() + '.html')
+            )
+            target = os.path.join(
+                args['django_application_folder'],
+                'templates',
+                convert(args['model_name'].strip().lower()),
+                convert(item.strip().lower() + '.html')
+            )
+            shutil.copy(original, target)
+
 
 
 if __name__ == '__main__':

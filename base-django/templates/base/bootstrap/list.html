@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <h1>
+                {% trans 'List of' %} {{ model_name_plural }}
+            </h1>
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th>
+                            {{ model_name_plural }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for element in list %}
+                        <tr>
+                            <td>
+                                    {% if element.slug %}
+                                        <a href="{% url detail_url_name element.slug %}">
+                                            {% if element|stringformat:"s" %}
+                                                {{ element }}
+                                            {% else %}
+                                                {{ element.slug }}
+                                            {% endif %}
+                                        </a>
+                                    {% else %}
+                                        <a href="{% url detail_url_name element.id %}">
+                                            {% if element|stringformat:"s" %}
+                                                {{ element }}
+                                            {% else %}
+                                                {{ element.id }}
+                                            {% endif %}
+                                        </a>
+                                        </a>
+                                    {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="actions">
+                {% if create_object_reversed_url %}
+                    <a href="{{ create_object_reversed_url }}">
+
+                        <button class="btn btn-success">
+                            {% trans 'Create' %}
+                        </button>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

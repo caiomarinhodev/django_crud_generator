@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+    <h1>
+        {% trans 'List of' %} {{ model_name_plural }}
+    </h1>
+    {% for element in list %}
+        <div class="card">
+            <div class="card-title black-text">
+                {% if element.slug %}
+                    <a href="{% url detail_url_name element.slug %}">{{ element }}</a>
+                {% else %}
+                    <a href="{% url detail_url_name element.id %}">{{ element }}</a>
+                {% endif %}
+            </div>
+            {% if element.description%}
+                <div class="card-content">
+                    {{ element.description }}
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+    <div class="row ">
+        <div class="col m4 s8 offset-m4 offset-s2">
+            <ul class="pagination ">
+
+                {% if list.has_previous %}
+                    <li>
+                        <a href="?page={{ list.previous_page_number }}">
+                            <i class="material-icons">
+                                chevron_left
+                            </i>
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% for i in range %}
+                    {% if i == list.number %}
+                        <li class="active black">
+                            <a href="#!">
+                                {{ i }}
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="waves-effect">
+                            <a href="?page={{ i }}">
+                                {{ i }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if list.has_next %}
+                    <li>
+                        <a href="?page={{ list.next_page_number }}">
+                            <i class="material-icons">
+                                chevron_right
+                            </i>
+                        </a>
+                    </li>
+                {% endif %}
+
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="actions">
+        {% if create_object_reversed_url %}
+            <a href="{{ create_object_reversed_url }}">
+
+                <button class="btn btn-success">
+                    {% trans 'Create' %}
+                </button>
+            </a>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load form_utils %}
+{% load render_table from django_tables2 %}
+
+{% block content %}
+
+    <div class="section product-item">
+        <div class="container">
+            <div class="row row-title">
+                <div class="col s12">
+                    <div class="section-title">
+                        <span class="theme-secondary-color">Lista</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-no-margin">
+                {% for object in object_list %}
+                    <!-- Product item-->
+                    <div>
+                        <div class="col s6 m4 l3 col-produc">
+                            <div class="box-product">
+                                <div class="bp-top">
+                                    <div class="product-list-img">
+                                        <div class="pli-one">
+                                            <div class="pli-two">
+                                                {% if object.photo %}
+                                                    <img src="{{ object.photo }}" alt="img">
+                                                {% else %}
+                                                    <img src="{% static 'adminlte/img/300.png' %}" alt="img">
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h5><a href="">Broccoli</a></h5>
+                                    <div class="item-info">Broccoli - 2~3 pcs</div>
+                                    <div class="price">
+                                        $5 <span>/500 gram</span>
+                                    </div>
+                                    <div class="stock-item">Only available 4 item</div>
+                                </div>
+                                <div class="bp-bottom">
+                                    <a href="{% url detail_url_name object.pk %}" class="btn button-add-cart">COMPRAR</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- PAGINATION -->
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <ul class="pagination">
+                    <li class="disabled">
+                        <a href="#!"><i class="material-icons">chevron_left</i></a>
+                    </li>
+                    <li class="active">
+                        <a href="#!">1</a>
+                    </li>
+                    <li class="waves-effect">
+                        <a href="#!">2</a>
+                    </li>
+                    <li class="waves-effect">
+                        <a href="#!">3</a>
+                    </li>
+                    <li class="waves-effect">
+                        <a href="#!">4</a>
+                    </li>
+                    <li class="waves-effect">
+                        <a href="#!">5</a>
+                    </li>
+                    <li class="waves-effect">
+                        <a href="#!"><i class="material-icons">chevron_right</i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- END PAGINATION -->
+{% endblock %}
+
+
+

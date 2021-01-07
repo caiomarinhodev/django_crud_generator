@@ -1,6 +1,12 @@
-class ${model_name}(forms.ModelForm):
+
+
+class ${model_name}Form(BaseForm, ModelForm):
     class Meta:
         model = models.${model_name}
         fields = '__all__'
         widgets = generate_bootstrap_widgets_for_all_fields(models.${model_name})
 
+    def __init__(self, *args, **kwargs):
+        super(${model_name}Form, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_tag = False

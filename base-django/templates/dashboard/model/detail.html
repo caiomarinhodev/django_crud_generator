@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load form_utils %}
+{% block content %}
+    {% include 'breadcrumb.html' with title='Visualizar' subtitle='' link1='Model' link2='Visualizar' %}
+
+    <div class="box box-primary" style="margin-top: 30px;">
+        <div class="box-header">
+            <h3 class="box-title">
+                <center style="font-size: 20px;">Visualizar</center>
+            </h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    {% for key, val in object|get_fields %}
+                        <dl>
+                            <dt>{{ key }}</dt>
+                            <dd>{{ val }}</dd>
+
+                        </dl>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="box box-footer">
+            <div class="actions">
+                <a href="javascript:window.history.back();">
+                    <button class="btn btn-default pull-left">
+                        Voltar
+                    </button>
+                </a>
+                {% if update_object_reversed_url %}
+                    <a href="{{ update_object_reversed_url }}">
+                        <button class="btn btn-primary pull-right">
+                            Editar
+                        </button>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#model').addClass('active');
+            $('#model-list').addClass('active');
+        });
+    </script>
+
+
+{% endblock %}

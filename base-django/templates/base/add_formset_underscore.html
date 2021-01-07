@@ -1,0 +1,10 @@
+<script type="text/html" id="formset-schema">
+    <div class="form-inline">
+        {% for input in form %}
+            <div class="form-group">
+                <label for="{{ input.name }}"></label>
+                {{ input|safe }}
+            </div>
+        {% endfor %}
+    </div>
+</script>

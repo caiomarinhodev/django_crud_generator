@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load form_utils %}
+{% load render_table from django_tables2 %}
+{% block content %}
+
+    <style>
+        .small-box .icon {
+            font-size: 70px;
+        }
+    </style>
+    {% include 'loading.html' %}
+    {% include 'breadcrumb.html' with title='Listagem' subtitle='Aqui ficam registrados todos os itens.' link1='Model' link2='Listagem' %}
+
+    {% if filter %}
+        <div class="row" style="margin-top: 30px">
+            <div class="col-md-12">
+                <form action="" method="get" class="form form-inline">
+                    <div class="box box-warning">
+                        <div class="box-header">
+                            <h3 class="box-title">Filtro de Dados</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {% load crispy_forms_tags %}
+                                    {% crispy filter.form %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            <button class="btn btn-primary btn-large pull-right" type="submit">Filtrar</button>
+                            <button class="btn btn-default btn-large pull-left reset">Limpar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">
+                        Listagem de {{ model_name_plural }}
+                    </h3>
+                </div>
+                <div class="box-header" id="add_cupom">
+                    <a href="{{ create_object_reversed_url }}" class="btn btn-primary pull-left"><i
+                            class="fa fa-plus"></i> Adicionar {{ model_name }}
+                    </a>
+                </div>
+                <!-- form start -->
+                <div class="box-body">
+                    <div class="dataTables_wrapper form-inline dt-bootstrap" id="example1_wrapper">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                {% render_table table %}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#model').addClass('active');
+            $('#model-list').addClass('active');
+            $('#table').DataTable({
+                responsive: true,
+                order: [[0, "desc"]],
+                "language": {
+                    "lengthMenu": "Exibir _MENU_ registros por página",
+                    "zeroRecords": "Nenhum item encontrado",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "Nenhum registro disponível",
+                    "emptyTable": "Sem dados disponíveis na tabela",
+                    "infoFiltered": "(filtrado do total de _MAX_ registros)",
+                    "thousands": ".",
+                    "loadingRecords": "Carregando...",
+                    "processing": "Processando...",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first": "Primeiro",
+                        "last": "Último",
+                        "next": "Próximo",
+                        "previous": "Anterior"
+                    },
+                    "aria": {
+                        "sortAscending": ": ativar para classificar a coluna ascendente",
+                        "sortDescending": ": ativar para classificar a coluna descendente"
+                    }
+                }
+            });
+
+            tour = new Tour({
+                name: 'model_list',
+                backdrop: true,
+                template: "<div class='popover tour'><div class='arrow'></div><h3 class='popover-title'></h3><div class='popover-content'></div><div class='popover-navigation'><button class='btn btn-default' data-role='prev'>« Anterior</button><span data-role='separator'>|</span><button id='prox' class='btn btn-default' data-role='next'>Próximo »</button><button id='fim' class='btn btn-default hidden' data-role='end'>Finalizar</button> </div></div>",
+                steps: [
+                    {
+                        element: ".box.box-primary",
+                        placement: "top",
+                        title: "Lista",
+                        content: "Aqui temos a tabela."
+                    },
+                    {
+                        element: "#table_filter",
+                        title: "Busca",
+                        placement: "left",
+                        content: "Utilize este campo de busca para procurar por algum cliente específico.",
+                        onShow: function (tour) {
+                            var timeOut = setTimeout(function () {
+                                $('#fim').removeClass('hidden');
+                                $('#prox').addClass('hidden');
+                                timeOut = setTimeout(function () {
+                                    $('#fim').removeClass('hidden');
+                                    clearTimeout(timeOut);
+                                }, 500);
+                            }, 500);
+
+                        }
+                    }
+
+                ]
+            });
+
+        });
+    </script>
+
+{% endblock %}

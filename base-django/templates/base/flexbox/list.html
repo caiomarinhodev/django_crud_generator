@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+    <div class="row center">
+        <div class="col ">
+            <h1>
+                {% trans 'List of' %} {{ model_name_plural }}
+            </h1>
+        </div>
+    </div>
+    <div class="row center content">
+        <div class="col">
+            <table>
+                <thead>
+                <tr>
+                    <th>
+                        {{ model_name_plural }}
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for element in list %}
+                    <tr>
+                        <td>
+                            {% if element.slug %}
+                                <a href="{% url detail_url_name element.slug %}">
+                                    {% if element|stringformat:"s" %}
+                                        {{ element }}
+                                    {% else %}
+                                        {{ element.slug }}
+                                    {% endif %}
+                                </a>
+                            {% else %}
+                                <a href="{% url detail_url_name element.id %}">
+                                    {% if element|stringformat:"s" %}
+                                        {{ element }}
+                                    {% else %}
+                                        {{ element.id }}
+                                    {% endif %}
+                                </a>
+                                </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row center">
+        {% if create_object_reversed_url %}
+            <a href="{{ create_object_reversed_url }}">
+
+                <button class="col btn btn-primary">
+                    {% trans 'Create' %}
+                    <i class="fa fa-plus"></i>
+                </button>
+            </a>
+        {% endif %}
+    </div>
+
+{% endblock %}

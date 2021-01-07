@@ -1,0 +1,128 @@
+{% load staticfiles %}
+{% load i18n %}
+{% load account socialaccount %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Name App | Log in</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href='{% static 'adminlte/bootstrap/css/bootstrap.min.css' %}'>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    {#    <!-- Ionicons -->#}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href='{% static 'adminlte/dist/css/AdminLTE.css' %}'>
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+    folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href='{% static 'adminlte/dist/css/skins/_all-skins.min.css' %}'>
+    <!-- iCheck -->
+    <link rel="stylesheet" href='{% static 'adminlte/plugins/iCheck/square/blue.css' %}'>
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="{% static 'adminlte/css/sweetalert.min.css' %}">
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+    <center><img src="{% static 'adminlte/img/logo-small.png' %}" class="logo-mini user-image" style="max-height: 50px;"
+                 alt="logo"/></center>
+    <div class="login-logo">
+        <a href="/"><b>Music </b>App</a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">Faça Login para iniciar sua sessão</p>
+
+        {% get_providers as socialaccount_providers %}
+
+        {% if socialaccount_providers %}
+            <p>{% blocktrans with site.name as site_name %}Faça login com uma de suas contas existentes de terceiros. Ou, <a href="{{ signup_url }}">Inscreva-se</a>
+                em uma conta do {{ site_name }} e faça login abaixo:{% endblocktrans %}</p>
+
+            <div class="socialaccount_ballot">
+
+                <ul class="socialaccount_providers">
+                    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                </ul>
+
+                <div class="login-or">{% trans 'or' %}</div>
+
+            </div>
+
+            {% include "socialaccount/snippets/login_extra.html" %}
+
+        {% else %}
+            <p>{% blocktrans %}Se você ainda não criou uma conta,
+                <a href="{{ signup_url }}">inscreva-se</a> primeiro.{% endblocktrans %}</p>
+        {% endif %}
+
+
+        <form action="" method="post">{% csrf_token %}
+            <div class="form-group has-feedback">
+                {{ form.login }}
+            </div>
+            <div class="form-group has-feedback">
+                {{ form.password }}
+            </div>
+            <div class="row">
+                <div class="col-xs-8">
+                    {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                    {% endif %}
+                    <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Esqueceu a senha?" %}</a>
+                </div>
+                <!-- /.col -->
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+    </div>
+    <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery 3 -->
+<script src="{% static 'adminlte/plugins/jQuery/jQuery-2.2.0.min.js' %}"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="{% static 'adminlte/bootstrap/js/bootstrap.min.js' %}"></script>
+<!-- iCheck -->
+<script src="{% static 'adminlte/plugins/iCheck/icheck.min.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'adminlte/js/sweetalert.min.js' %}"></script>
+<script>
+    $(function () {
+        $('input[type!=checkbox]').addClass('form-control');
+    });
+</script>
+
+
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'error' %}
+            <script>
+                $(document).ready(function () {
+                    swal("Erro", "{{ message|safe }}", "error")
+                });
+            </script>
+        {% else %}
+            <script>
+                $(document).ready(function () {
+                    swal("Sucesso", "{{ message|safe }}", "success")
+                });
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+</body>
+</html>

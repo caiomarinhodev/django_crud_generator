@@ -1,0 +1,158 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-11-19 00:25-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: conf.py:21
+msgid "Object created successfully"
+msgstr "Objeto creado exitosamente"
+
+#: conf.py:22
+msgid "Object updated successfully"
+msgstr "Objeto actualizado exitosamente"
+
+#: conf.py:23
+msgid "Object deleted successfully"
+msgstr "Objeto eliminado exitosamente"
+
+#: conf.py:25 templates/base/bootstrap/detail.html:16
+msgid "Name"
+msgstr "Nombre"
+
+#: conf.py:26
+msgid "Description"
+msgstr "Descripción"
+
+#: conf.py:27
+msgid "Slug"
+msgstr "Slug"
+
+#: conf.py:28
+msgid "Created"
+msgstr "Creado"
+
+#: conf.py:29
+msgid "Modified"
+msgstr "Modificado"
+
+#: conf.py:30
+msgid "Active"
+msgstr "Activo"
+
+#: conf.py:32
+msgid "Configuring application {}"
+msgstr "Configurando la aplicación {}"
+
+#: conf.py:33
+msgid "Creating Permission with name {}"
+msgstr "Creando Permiso con nombre {}"
+
+#: conf.py:34
+msgid "Creating Group with name {}"
+msgstr "Creando Grupo con nombre {}"
+
+#: templates/403.html:5
+msgid "Forbidden"
+msgstr "Prohibido"
+
+#: templates/403.html:8
+msgid "You haven't access to this site"
+msgstr "No tienes acceso a este sitio"
+
+#: templates/404.html:5
+msgid "Not Found"
+msgstr "No encontrado"
+
+#: templates/404.html:8
+msgid "The URL that you're requesting is not found on this server"
+msgstr "La URL que ha solicitada no se encontró en este servidor"
+
+#: templates/base/bootstrap/create.html:5 templates/base/bootstrap/list.html:36
+#: templates/base/bootstrap/pagination_grid.html:97
+#: templates/base/bootstrap/pagination_list.html:84
+#: templates/base/materialize/create.html:5
+#: templates/base/materialize/list.html:30
+#: templates/base/materialize/pagination_grid.html:97
+#: templates/base/materialize/pagination_list.html:73
+msgid "Create"
+msgstr "Crear"
+
+#: templates/base/bootstrap/create.html:58
+#: templates/base/materialize/create.html:55
+msgid "create"
+msgstr "Crear"
+
+#: templates/base/bootstrap/delete.html:8
+#: templates/base/bootstrap/delete.html:20
+#: templates/base/bootstrap/detail.html:55
+#: templates/base/materialize/delete.html:5
+#: templates/base/materialize/delete.html:16
+#: templates/base/materialize/detail.html:34
+msgid "Delete"
+msgstr "Eliminar"
+
+#: templates/base/bootstrap/delete.html:11
+#: templates/base/materialize/delete.html:8
+msgid "Trying to delete"
+msgstr "Tratando de eliminar"
+
+#: templates/base/bootstrap/delete.html:14
+#: templates/base/materialize/delete.html:11
+msgid "Deleting this object also deletes this objects"
+msgstr "Al eliminar este objeto, también se eliminarán los siguientes objetos"
+
+#: templates/base/bootstrap/detail.html:8
+#: templates/base/materialize/detail.html:5
+msgid "Of class"
+msgstr "De la clase"
+
+#: templates/base/bootstrap/detail.html:19
+msgid "Value"
+msgstr "Valor"
+
+#: templates/base/bootstrap/detail.html:42
+#: templates/base/bootstrap/update.html:55
+#: templates/base/materialize/detail.html:21
+msgid "Back"
+msgstr "Atrás"
+
+#: templates/base/bootstrap/detail.html:48
+#: templates/base/bootstrap/update.html:5
+#: templates/base/materialize/detail.html:27
+#: templates/base/materialize/update.html:5
+msgid "Update"
+msgstr "Actualizar"
+
+#: templates/base/bootstrap/grid.html:5
+#: templates/base/bootstrap/pagination_grid.html:5
+#: templates/base/materialize/grid.html:5
+#: templates/base/materialize/pagination_grid.html:5
+msgid "Grid of"
+msgstr "Cuadrícula de"
+
+#: templates/base/bootstrap/list.html:7
+#: templates/base/bootstrap/pagination_list.html:7
+#: templates/base/materialize/list.html:5
+#: templates/base/materialize/pagination_list.html:5
+msgid "List of"
+msgstr "Lista de"
+
+#: templates/base/bootstrap/update.html:59
+#: templates/base/materialize/update.html:37
+msgid "update"
+msgstr "Actualizar"
