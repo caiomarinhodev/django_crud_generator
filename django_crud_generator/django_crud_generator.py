@@ -297,6 +297,16 @@ def execute_from_command_line(*arg, **args):
 
 def copy_templates(args):
     lista = []
+    if not os.path.isdir(
+            os.path.join(
+                args['django_application_folder'],
+                'templates')):
+        os.mkdir(
+            os.path.join(
+                args['django_application_folder'],
+                'templates'
+            )
+        )
     if args['gen_template_default']:
         if args['type_template'] == 'dashboard':
             lista = [
