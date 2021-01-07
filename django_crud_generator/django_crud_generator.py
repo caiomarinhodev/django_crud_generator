@@ -10,6 +10,7 @@ import sys
 import string
 
 BASE_TEMPLATES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "templates")
+BASE_DJANGO_TEMPLATES_HTML = os.path.join(os.path.dirname(os.path.abspath(__file__)), "base_django")
 VIEW_CLASSES = [
     "List",
     "Create",
@@ -303,7 +304,7 @@ def copy_templates(args):
             ]
         for basic in lista:
             original = os.path.join(
-                'base_django',
+                BASE_DJANGO_TEMPLATES_HTML,
                 'templates',
                 args['type_template'],
                 basic
@@ -329,7 +330,7 @@ def copy_templates(args):
                         convert(args['model_name'].strip().lower()))
                 )
             original = os.path.join(
-                'base_django',
+                BASE_DJANGO_TEMPLATES_HTML,
                 'templates',
                 args['type_template'],
                 'model',
