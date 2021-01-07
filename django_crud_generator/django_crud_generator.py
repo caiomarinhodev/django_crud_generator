@@ -11,6 +11,7 @@ import string
 
 BASE_TEMPLATES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "templates")
 BASE_DJANGO_TEMPLATES_HTML = os.path.join(BASE_TEMPLATES_DIR, "templates_html")
+BASE_TEMPLATE_TAGS = os.path.join(BASE_TEMPLATES_DIR, "templatetags")
 VIEW_CLASSES = [
     "List",
     "Create",
@@ -289,6 +290,9 @@ def execute_from_command_line(*arg, **args):
             )
         )
     copy_templates(args)
+    if args['gen_template_default']:
+        copy_account(args)
+        copy_template_tags(args)
 
 
 def copy_templates(args):
@@ -341,6 +345,70 @@ def copy_templates(args):
                 convert(item.strip().lower() + '.html')
             )
             shutil.copy(original, target)
+
+
+def copy_account(args):
+    if not os.path.isdir(
+            os.path.join(
+                args['django_application_folder'],
+                'templates',
+                'account')):
+        os.mkdir(
+            os.path.join(
+                args['django_application_folder'],
+                'templates',
+                'account')
+        )
+    for basic in [
+        'login.html', 'password_change.html', 'password_reset.html', 'signup.html',
+    ]:
+        original = os.path.join(
+            BASE_DJANGO_TEMPLATES_HTML,
+            args['type'],
+            'account',
+            basic
+        )
+        target = os.path.join(
+            args['django_application_folder'],
+            'templates',
+            'account',
+            basic
+        )
+        shutil.copy(original, target)
+
+
+def copy_template_tags(args):
+    if not os.path.isdir(
+            os.path.join(
+                args['django_application_folder'],
+                'templatetags')):
+        os.mkdir(
+            os.path.join(
+                args['django_application_folder'],
+                'templatetags'
+            )
+        )
+        init_file = codecs.open(
+            os.path.join(
+                args['django_application_folder'],
+                'templatetags',
+                '__init__.py'
+            ),
+            'w+'
+        )
+        init_file.close()
+    for item in ['form_utils.py', 'input_checker.py', 'math_utils.py', 'type_utils.py']:
+        original = os.path.join(
+            BASE_TEMPLATE_TAGS,
+            item
+        )
+        target = os.path.join(
+            args['django_application_folder'],
+            'templatetags',
+            item
+        )
+
+        shutil.copy(original, target)
 
 
 if __name__ == '__main__':
