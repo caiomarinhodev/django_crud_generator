@@ -274,7 +274,7 @@ def execute_from_command_line(*arg, **args):
             model_name=args['model_name'],
             model_prefix=args['model_prefix'],
             url_pattern=args['url_pattern'],
-            view_file=simplified_file_name,
+            view_file=view_file_name,
             model_name_lower=args['model_name'].lower()
         )
 
