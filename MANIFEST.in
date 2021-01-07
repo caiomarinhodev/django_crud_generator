@@ -6,3 +6,4 @@ include django_crud_generator/templates/templates_html/dashboard/model/*.html
 include django_crud_generator/templates/templates_html/aplicativo/*.html
 include django_crud_generator/templates/templates_html/aplicativo/account/*.html
 include django_crud_generator/templates/templates_html/aplicativo/model/*.html
+include django_crud_generator/templates/templatetags/*.py
