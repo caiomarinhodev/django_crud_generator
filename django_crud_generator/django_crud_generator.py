@@ -207,58 +207,7 @@ def api(args):
     pass
 
 
-def execute_from_command_line():
-    parser = argparse.ArgumentParser(
-        "Create a simple CRUD Structure based contraslash django application "
-        "structure"
-    )
-
-    parser.add_argument(
-        '--django_application_folder',
-        default="."
-    )
-
-    parser.add_argument(
-        '--type_template',
-        default="dashboard",
-        help="Specifies default templates base"
-    )
-
-    parser.add_argument(
-        '--gen_template_default',
-        action='store_true',
-        help="Create a template default base"
-    )
-
-    parser.add_argument(
-        '--gen_template_model',
-        action='store_true',
-        help="Create a templates for model"
-    )
-
-    parser.add_argument(
-        '--model_name',
-        type=str,
-        help="Name of model for make the crud",
-        required=True
-    )
-
-    parser.add_argument(
-        '--model_prefix',
-        type=str,
-        help="Prefix name for conf variable"
-    )
-
-    parser.add_argument('--url_pattern', type=str, help="Pattern for url")
-
-    parser.add_argument('--create_api', action='store_true', help="Create a api using Django Rest Framework")
-
-    parser.add_argument('--add_mixins', action='store_true', help="Add mixins to manage nested urls")
-
-    parser.add_argument('--slug', action='store_true', help="Use slug instad pk on urls")
-
-    args = vars(parser.parse_args())    
-    
+def execute_from_command_line(*arg, **args):
     # If model prefix is not defined, we'll going to define model_prefix as
     # model_name in uppercase
     if args['model_prefix'] is None:
