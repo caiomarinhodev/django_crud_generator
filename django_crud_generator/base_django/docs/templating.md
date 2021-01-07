@@ -13,6 +13,6 @@ This folder must have a file for each view class:
 - BasePaginationListView: pagination_list.html
 - BaseUpdateView: update.html
 
-You can copy [bootstrap template folder](../templates/base/bootstrap) to use as a base
+You can copy [bootstrap template folder](../../templates/templates_html/base/bootstrap) to use as a base
  
 

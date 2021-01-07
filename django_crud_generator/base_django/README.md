@@ -36,8 +36,8 @@ We assume you have a `base.html` file with this a main block content, example:
 
 We support these CSS Frameworks:
 
-- [Bootstrap](templates/base/bootstrap)
-- [Materialize](templates/base/bootstrap)
+- [Bootstrap](../templates/templates_html/base/bootstrap)
+- [Materialize](../templates/templates_html/base/bootstrap)
 
 
 But if you prefer use your own styles, specify the template folder to use in your `settings.py` file
