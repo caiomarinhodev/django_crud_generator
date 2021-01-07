@@ -236,15 +236,6 @@ def execute_from_command_line(*arg, **args):
         VIEW_CLASSES,
         args
     )
-    # Seems like tests also has the same logic
-    permission_class_name = "{}Permission".format(args["model_name"])
-    generic_insert_with_folder(
-        "tests",
-        "test_{}".format(simplified_file_name),
-        "tests.py.tmpl",
-        [permission_class_name],
-        args
-    )
 
     modules_to_inject = [
         'conf',
