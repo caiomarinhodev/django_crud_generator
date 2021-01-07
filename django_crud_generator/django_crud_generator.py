@@ -239,7 +239,8 @@ def execute_from_command_line(*arg, **args):
 
     modules_to_inject = [
         'conf',
-        'forms'
+        'forms',
+        'admin'
     ]
 
     if args['slug']:
@@ -286,7 +287,7 @@ def execute_from_command_line(*arg, **args):
                 "urls_api_urls_patch.py.tmpl"
             )
         )
-    # copy_templates(args)
+    copy_templates(args)
 
 
 def copy_templates(args):
