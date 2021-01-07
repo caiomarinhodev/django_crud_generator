@@ -85,20 +85,20 @@ def generic_insert_module(module_name, args, **kwargs):
             '{}.py'.format(module_name),
         ),
         os.path.join(
-            BASE_TEMPLATES_DIR, 
+            BASE_TEMPLATES_DIR,
             '{}_initial.py.tmpl'.format(module_name)
-        ), 
+        ),
         args
     )
-        
+
     render_template_with_args_in_file(
-        file, 
+        file,
         os.path.join(
-            BASE_TEMPLATES_DIR, 
+            BASE_TEMPLATES_DIR,
             '{}.py.tmpl'.format(module_name)
-        ), 
+        ),
         **kwargs
-        )
+    )
     file.close()
 
 
@@ -127,10 +127,10 @@ def sanity_check(args):
     """
     # Validate is an django application folder
     if not os.path.isfile(
-        os.path.join(
-            args['django_application_folder'],
-            'models.py'
-        )
+            os.path.join(
+                args['django_application_folder'],
+                'models.py'
+            )
     ):
         print("django_application_folder is not a Django application folder")
         sys.exit(1)
@@ -146,16 +146,16 @@ def sanity_check(args):
         sys.exit(1)
 
 
-def generic_insert_with_folder(folder_name, file_name, template_name, checking_classes,args):
+def generic_insert_with_folder(folder_name, file_name, template_name, checking_classes, args):
     """
     In general if we need to put a file on a folder, we use this method
     """
     # First we make sure views are a package instead a file
     if not os.path.isdir(
-        os.path.join(
-            args['django_application_folder'],
-            folder_name
-        )
+            os.path.join(
+                args['django_application_folder'],
+                folder_name
+            )
     ):
         os.mkdir(os.path.join(args['django_application_folder'], folder_name))
         codecs.open(
@@ -173,7 +173,7 @@ def generic_insert_with_folder(folder_name, file_name, template_name, checking_c
     )
     view_file = create_or_open(
         full_file_name,
-        '', 
+        '',
         args
     )
 
@@ -181,7 +181,7 @@ def generic_insert_with_folder(folder_name, file_name, template_name, checking_c
             operator.and_,
             map(
                 check_class_in_file,
-                (full_file_name,)*len(VIEW_CLASSES),
+                (full_file_name,) * len(VIEW_CLASSES),
                 checking_classes
             )
     ):
@@ -190,9 +190,9 @@ def generic_insert_with_folder(folder_name, file_name, template_name, checking_c
 
     # Load content from template
     render_template_with_args_in_file(
-        view_file, 
+        view_file,
         os.path.join(
-            BASE_TEMPLATES_DIR, 
+            BASE_TEMPLATES_DIR,
             template_name
         ),
         model_name=args['model_name'],
@@ -218,8 +218,8 @@ def execute_from_command_line(*arg, **args):
 
     if args['django_application_folder'].endswith("/"):
         args['django_application_folder'] = args[
-            'django_application_folder'
-        ][:-1]
+                                                'django_application_folder'
+                                            ][:-1]
 
     # Views has an specific logic, so we don't touch it
     view_file_name = convert(args['model_name'].strip()).capitalize() + str('View')
@@ -255,7 +255,7 @@ def execute_from_command_line(*arg, **args):
         modules_to_inject.append('urls_slug')
     else:
         modules_to_inject.append('urls')
-    
+
     if args['create_api']:
         modules_to_inject += [
             'serializers',
@@ -264,12 +264,12 @@ def execute_from_command_line(*arg, **args):
         ]
 
     # If mixins flag is present, we add mixins to the `modules to inject`
-    #if args['add_mixins']:
+    # if args['add_mixins']:
     modules_to_inject.append('mixins')
 
     for module in modules_to_inject:
         generic_insert_module(
-            module, 
+            module,
             args,
             model_name=args['model_name'],
             model_prefix=args['model_prefix'],
@@ -284,14 +284,14 @@ def execute_from_command_line(*arg, **args):
             create_or_open(
                 os.path.join(
                     args['django_application_folder'],
-                    BASE_TEMPLATES_DIR, 
+                    BASE_TEMPLATES_DIR,
                     'urls.py'
-                ), 
-                "", 
+                ),
+                "",
                 args
-            ), 
+            ),
             os.path.join(
-                BASE_TEMPLATES_DIR, 
+                BASE_TEMPLATES_DIR,
                 "urls_api_urls_patch.py.tmpl"
             )
         )
@@ -350,7 +350,6 @@ def copy_templates(args):
                 convert(item.strip().lower() + '.html')
             )
             shutil.copy(original, target)
-
 
 
 if __name__ == '__main__':

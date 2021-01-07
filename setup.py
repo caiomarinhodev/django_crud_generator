@@ -13,24 +13,16 @@ setup(
     description='A simple scaffolding for django applications',
     long_description=readme(),
     long_description_content_type="text/markdown",
-    url='http://github.com/contraslash/django-crud-generator',
     keywords='django scaffolding tool',
-    author='contraslash S.A.S.',
-    author_email='ma0@contraslash.com',
-    classifiers=[ 
+    classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3',
     ],
     license='MIT',
-    packages=['django_crud_generator', 'base_django'],
+    packages=['django_crud_generator', 'django_crud_generator.base_django'],
     scripts=['django_crud_generator/bin/django-crud-generator.py'],
     zip_safe=False,
     include_package_data=True,
-    project_urls={  
-        'Bug Reports': 'https://github.com/contraslash/django-crud-generator/issues',
-        'Source': 'https://github.com/contraslash/django-crud-generator',
-        'Contraslash': 'https://contraslash.com/'
-    },
 )
