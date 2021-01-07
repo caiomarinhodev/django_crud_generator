@@ -1,3 +1,4 @@
 include README.md
 include django_crud_generator/templates/*.tmpl
-recursive-include django_crud_generator/templates/templates_html/*.html
+include django_crud_generator/templates/templates_html/dashboard/*.html
+recursive-include django_crud_generator/templates/templates_html/aplicativo/*.html
