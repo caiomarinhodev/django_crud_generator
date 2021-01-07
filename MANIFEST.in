@@ -1,2 +1,3 @@
 include README.md
 include django_crud_generator/templates/*.tmpl
+recursive-include django_crud_generator/templates/templates_html/*.html
