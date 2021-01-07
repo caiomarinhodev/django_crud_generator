@@ -222,6 +222,7 @@ def execute_from_command_line(*arg, **args):
         ][:-1]
 
     # Views has an specific logic, so we don't touch it
+    view_file_name = convert(args['model_name'].strip()).capitalize() + str('View')
     simplified_file_name = convert(args['model_name'].strip())
 
     args["simplified_view_file_name"] = simplified_file_name
@@ -230,7 +231,7 @@ def execute_from_command_line(*arg, **args):
 
     generic_insert_with_folder(
         "views",
-        simplified_file_name,
+        view_file_name,
         "view.py.tmpl",
         VIEW_CLASSES,
         args
@@ -294,6 +295,7 @@ def execute_from_command_line(*arg, **args):
                 "urls_api_urls_patch.py.tmpl"
             )
         )
+    # copy_templates(args)
 
 
 def copy_templates(args):
