@@ -294,11 +294,11 @@ def execute_from_command_line(*arg, **args):
 def copy_templates(args):
     lista = []
     if args['gen_template_default']:
-        if args['type'] == 'dashboard':
+        if args['type_template'] == 'dashboard':
             lista = [
                 '404.html', '500.html', 'base.html', 'base_error.html', 'loading.html', 'breadcrumb.html', 'menu.html'
             ]
-        elif args['type'] == 'aplicativo':
+        elif args['type_template'] == 'aplicativo':
             lista = [
                 '404.html', '500.html', 'base.html', 'footer.html', 'header.html', 'nav.html'
             ]
