@@ -29,3 +29,8 @@ def add_formset_element_js(formset):
 @register.simple_tag(name="formset_js")
 def formset_js():
     return get_template("base/add_formset_underscore_js.html").render()
+
+
+@register.filter()
+def get_fields(obj):
+    return [(field.name, field.value_to_string(obj)) for field in obj._meta.fields]
