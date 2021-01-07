@@ -364,7 +364,7 @@ def copy_account(args):
     ]:
         original = os.path.join(
             BASE_DJANGO_TEMPLATES_HTML,
-            args['type'],
+            args['type_template'],
             'account',
             basic
         )
