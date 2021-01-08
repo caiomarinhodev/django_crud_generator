@@ -98,6 +98,11 @@ class Create(LoginRequiredMixin, PermissionRequiredMixin, BaseCreateView):
 
     def get_context_data(self, **kwargs):
         context = super(Create, self).get_context_data(**kwargs)
+
+        if self.request.user.has_perm("${application_name}.change_${model_name_lower}"):
+            context['back_list_reversed_url'] = reverse_lazy(
+                conf.${model_prefix}_LIST_URL_NAME
+            )
         return context
 
     def get_success_url(self):
@@ -132,6 +137,9 @@ class Detail(LoginRequiredMixin, BaseDetailView):
                 conf.${model_prefix}_UPDATE_URL_NAME,
                 kwargs=self.kwargs_for_reverse_url()
             )
+            context['back_list_reversed_url'] = reverse_lazy(
+                conf.${model_prefix}_LIST_URL_NAME
+            )
 
         if self.request.user.has_perm("${application_name}.delete_${model_name_lower}"):
             context['delete_object_reversed_url'] = reverse_lazy(
@@ -161,8 +169,13 @@ class Update(LoginRequiredMixin, PermissionRequiredMixin, BaseUpdateView):
         return reverse_lazy(conf.${model_prefix}_DETAIL_URL_NAME, kwargs=self.kwargs_for_reverse_url())
 
     def get_context_data(self, **kwargs):
-        data = super(Update, self).get_context_data(**kwargs)
-        return data
+        context = super(Update, self).get_context_data(**kwargs)
+
+        if self.request.user.has_perm("${application_name}.change_${model_name_lower}"):
+            context['back_list_reversed_url'] = reverse_lazy(
+                conf.${model_prefix}_LIST_URL_NAME
+            )
+        return context
 
     def form_valid(self, form):
         messages.success(self.request, '${model_name} atualizado com sucesso')
@@ -186,6 +199,10 @@ class Delete(LoginRequiredMixin, PermissionRequiredMixin, BaseDeleteView):
 
     def get_context_data(self, **kwargs):
         context = super(Delete, self).get_context_data(**kwargs)
+        if self.request.user.has_perm("${application_name}.change_${model_name_lower}"):
+            context['back_list_reversed_url'] = reverse_lazy(
+                conf.${model_prefix}_LIST_URL_NAME
+            )
         return context
 
     def __init__(self):
