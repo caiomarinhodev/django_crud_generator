@@ -73,7 +73,7 @@ def field_to_widget(field):
             return Select(attrs={"class": "form-control"})
         return TextInput(attrs={"class": "form-control", "rows": 1})
     if type(field) is TextField:
-        return Textarea(attrs={"class": "form-control", "rows": 1})
+        return Textarea(attrs={"class": "form-control", "rows": 5})
     if type(field) is AutoField:
         return HiddenInput(attrs={"class": "form-control", "rows": 1})
     if type(field) is IntegerField or type(field) is FloatField:
@@ -83,9 +83,9 @@ def field_to_widget(field):
     if type(field) is ForeignKey:
         return Select(attrs={"class": "form-control"})
     if type(field) is ManyToManyField:
-        return CheckboxSelectMultiple(attrs={"class": ""})
+        return CheckboxSelectMultiple(attrs={"class": "checkbox"})
     if type(field) is BooleanField:
-        return CheckboxInput(attrs={"class": "form-control"})
+        return CheckboxInput(attrs={"class": "checkbox"})
     if type(field) is FileField:
         return FileInput(attrs={"class": "form-control"})
     if type(field) is DateField:
