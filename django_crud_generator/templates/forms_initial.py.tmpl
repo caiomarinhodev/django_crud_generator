@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import ModelForm
+from django.forms import ModelForm, BooleanField, NullBooleanField
 from crispy_forms.bootstrap import TabHolder, Tab, FormActions
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, Submit, HTML
@@ -13,7 +13,7 @@ class BaseForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(BaseForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
-            if type(field) in [BooleanField, NullBooleanField, BooleanField]:
+            if type(field) in [BooleanField, NullBooleanField]:
                 field.widget.attrs['class'] = ''
             else:
                 field.widget.attrs['class'] = 'form-control'
